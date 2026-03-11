@@ -42,13 +42,13 @@ ehthumbs.db
 Thumbs.db
 
 # Output files (keep samples)
-results_*.png
-results_*.html
-results_*.pdf
-demo_*.png
-demo_*.html
-*_visualization.png
-*_interactive.html
+# results_*.png
+# results_*.html
+# results_*.pdf
+# demo_*.png
+# demo_*.html
+# *_visualization.png
+# *_interactive.html
 
 # Data files (large CSV files - keep samples only)
 dose3d*.csv
