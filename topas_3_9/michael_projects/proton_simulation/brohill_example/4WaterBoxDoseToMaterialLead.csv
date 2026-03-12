@@ -1,0 +1,6 @@
+# TOPAS Version: 3.9
+# Parameter File: /home/byui-physics/topas_3_9/michael_projects/proton_simulation/brohill_example/DoseToMediumVsWaterExample.txt
+# Results for scorer: 4WaterBoxDoseToMaterialLead
+# Scored in component: WaterBox
+# DoseToMaterial ( Gy ) : Sum   
+1.564963436617717e-13

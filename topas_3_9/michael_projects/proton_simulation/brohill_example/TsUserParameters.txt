@@ -1,0 +1,65 @@
+# ==========================================
+# TOPAS Demo 01 — Basic Gamma Beam
+# ==========================================
+
+# ----------------------------
+# World geometry
+# ----------------------------
+s:Ge/World/Type = "TsBox"
+d:Ge/World/HLX = 20 cm
+d:Ge/World/HLY = 20 cm
+d:Ge/World/HLZ = 20 cm
+s:Ge/World/Material = "G4_AIR"
+
+# ----------------------------
+# Simple water target
+# ----------------------------
+s:Ge/Target/Parent = "World"
+s:Ge/Target/Type = "TsBox"
+d:Ge/Target/HLX = 5 cm
+d:Ge/Target/HLY = 5 cm
+d:Ge/Target/HLZ = 5 cm
+s:Ge/Target/Material = "G4_WATER"
+d:Ge/Target/TransZ = 5 cm
+i:Ge/Target/XBins = 40
+i:Ge/Target/YBins = 40
+i:Ge/Target/ZBins = 40
+
+# ----------------------------
+# Gamma source
+# ----------------------------
+s:So/GammaBeam/Component = "World"
+s:So/GammaBeam/Type = "Beam"
+s:So/GammaBeam/BeamParticle = "gamma"
+d:So/GammaBeam/BeamEnergy = 1 MeV
+# i:So/GammaBeam/NumberOfHistories = 10000
+s:So/GammaBeam/BeamPositionDistribution = "None"
+d:So/GammaBeam/BeamPositionX = 4 cm
+d:So/GammaBeam/BeamPositionY = 0 cm
+d:So/GammaBeam/BeamPositionZ = -15 cm
+s:So/GammaBeam/BeamAngularDistribution = "None"
+
+# ----------------------------
+# Dose scorer in the target
+# ----------------------------
+s:Sc/Dose/IfOutputFileAlreadyExists = "Overwrite"
+s:Sc/Dose/Quantity = "DoseToMedium"
+s:Sc/Dose/Component = "Target"
+s:Sc/Dose/OutputFile = "dose.txt"
+
+# ------------------------------------------
+# Demo-friendly depth-dose along Z in Target
+# ------------------------------------------
+i:So/GammaBeam/NumberOfHistoriesInRun = 100000
+
+# ==========================================
+# 3D Dose scorer for ParaView (VTK output)
+# ==========================================
+
+s:Sc/Dose3D/Quantity = "DoseToMedium"
+s:Sc/Dose3D/Component = "Target"
+s:Sc/Dose3D/OutputType = "CSV"
+s:Sc/Dose3D/OutputFile = "dose3d"
+s:Sc/Dose3D/IfOutputFileAlreadyExists = "Increment"
+
+# Voxel grid (matches target size)

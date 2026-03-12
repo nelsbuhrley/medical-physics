@@ -1,0 +1,134 @@
+
+# ============================================================
+# WORLD GEOMETRY
+# ============================================================
+
+s:Ge/World/Type = "TsBox"
+d:Ge/World/HLX = 20 cm
+d:Ge/World/HLY = 20 cm
+d:Ge/World/HLZ = 20 cm
+s:Ge/World/Material = "G4_AIR"
+
+# ============================================================
+# WATER BOX (Patient Phantom)
+# ============================================================
+
+s:Ge/MyBox/Type = "TsBox"
+s:Ge/MyBox/Material = "G4_WATER"
+s:Ge/MyBox/Parent = "World"
+s:Ge/MyBox/Color = "blue"
+
+d:Ge/MyBox/HLX = 10 cm
+d:Ge/MyBox/HLY = 10 cm
+d:Ge/MyBox/HLZ = 10 cm
+
+
+# Physics
+sv:Ph/Default/Modules = 1 "g4em-standard_opt0"
+
+
+# ============================================================
+# SPHERICAL TUMOR
+# ============================================================
+
+s:Ge/Tumor/Parent = "MyBox"
+s:Ge/Tumor/Type = "TsSphere"
+s:Ge/Tumor/Color = "red"
+
+s:Ge/Tumor/Material = "G4_TISSUE_SOFT_ICRP"
+
+d:Ge/Tumor/RMax = 2 cm
+d:Ge/Tumor/RMin = 0 cm
+
+d:Ge/Tumor/TransX = 0 cm
+d:Ge/Tumor/TransY = 0 cm
+d:Ge/Tumor/TransZ = 5 cm
+
+#i:Ge/Tumor/XBins = 40
+#i:Ge/Tumor/YBins = 40
+#i:Ge/Tumor/ZBins = 40
+
+
+# ============================================================
+# PROTON BEAM SOURCE
+# ============================================================
+
+s:So/ProtonBeam/Component = "World"
+s:So/ProtonBeam/Type = "Beam"
+s:So/ProtonBeam/Color = "yellow"
+
+s:So/ProtonBeam/BeamParticle = "proton"
+d:So/ProtonBeam/BeamEnergy = 67.5 MeV
+
+s:So/ProtonBeam/BeamPositionDistribution = "None"
+d:So/ProtonBeam/BeamPositionX	= 0 cm
+d:So/ProtonBeam/BeamPositionY 	= 0 cm
+d:So/ProtonBeam/BeamPositionZ 	= 15 cm
+
+d:So/ProtonBeam/DirectionX = 0 cm
+d:So/ProtonBeam/DirectionY = 0 cm
+d:So/ProtonBeam/DirectionZ = 1 cm
+
+
+d:So/ProtonBeam/TranzX	= 0 cm
+d:So/ProtonBeam/TranzY	= 0 cm
+d:So/ProtonBeam/TranzZ	= 15 cm
+
+s:So/ProtonBeam/BeamAngularDistribution = "None"
+# ===============================================
+# For if BeamAngularDistribution = "Gaussian"
+# ===============================================
+#d:So/ProtonBeam/BeamAngularCutoffX	= 90 deg
+#d:So/ProtonBeam/BeamAngularCutoffY	= 90 deg
+#d:So/ProtonBeam/BeamAngularCutoffZ	= 90 deg
+#d:So/ProtonBeam/BeamAngularSpreadX	= 0.002 rad
+#d:So/ProtonBeam/BeamAngularSpreadY	= 0.002 rad
+
+# ============================================================
+# Visualization Settings
+# ============================================================
+
+s:Gr/ViewA/Type = "OpenGL"
+
+i:Gr/ViewA/WindowSizeX = 1200
+i:Gr/ViewA/WindowSizeY = 750
+b:Gr/ViewA/IncludeAxes = "False"
+
+# Camera orientation
+d:Gr/ViewA/Theta = 40 deg
+d:Gr/ViewA/Phi = 40 deg
+
+# Perspective view
+s:Gr/ViewA/Projection = "Perspective"
+d:Gr/ViewA/PerspectiveAngle = 60 deg
+
+# Zoom level
+u:Gr/ViewA/Zoom = 5
+
+
+# Background color
+s:Gr/ViewA/BackgroundColor = "black"
+
+b:Gr/ViewA/ShowTrajectories = "True"
+
+i:Gr/ViewA/MaxTrajectories = 500
+
+
+# ============================================================
+# 3D DOSE GRID FOR VISUALIZATION
+# ============================================================
+i:So/ProtonBeam/NumberOfHistoriesInRun = 50000
+
+# Dose scoring
+
+i:Sc/Dose3D/RBins 	= 15
+i:Sc/Dose3D/PhiBins	= 30
+i:Sc/Dose3D/ThetaBins 	= 15
+
+s:Sc/Dose3D/IfOutputFileAlreadyExists = "Overwrite"
+s:Sc/Dose3D/Quantity = "DoseToMedium"
+s:Sc/Dose3D/Component = "Tumor"
+s:Sc/Dose3D/OutputType = "CSV"
+s:Sc/Dose3D/OutputFile = "dose3d"
+
+# Voxel grid (matches target size)
